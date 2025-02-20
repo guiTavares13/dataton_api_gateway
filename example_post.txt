@@ -1,0 +1,24 @@
+$headers = @{
+    "Content-Type" = "application/json"
+}
+
+$body = @{
+    "username" = "guilherme"
+    "password" = "senha"
+} | ConvertTo-Json
+
+$response = Invoke-RestMethod -Uri "http://127.0.0.1:5000/login" -Method Post -Headers $headers -Body $body
+$response.access_token
+
+
+
+$token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczOTc2NzU4OCwianRpIjoiNzA4NGQyOGItODdjNS00MjFiLWI4MTQtODc3OTcyOTE0M2ZkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Imd1aWxoZXJtZSIsIm5iZiI6MTczOTc2NzU4OCwiY3NyZiI6IjE4YTdiZTlmLTEyODYtNGZmYS1iYmEwLTFhNDMwZDhjYjNkMiIsImV4cCI6MTczOTc2ODQ4OH0.XRSk7EEjzvDPpVkNtCiCc3pfc0BjszXQUK5IsI7p8ec"  # Substitua pelo token obtido
+$user_id = "f98d1132f60d46883ce49583257104d15ce723b3bbda2147c1e31ac76f0bf069"
+
+$headers = @{
+    "Authorization" = "Bearer $token"
+}
+
+$response = Invoke-RestMethod -Uri "http://127.0.0.1:5000/recommendations?user_id=$user_id" -Method Get -Headers $headers
+$response
+
