@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dataton-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dataton-api
+  template:
+    metadata:
+      labels:
+        app: dataton-api
+    spec:
+      containers:
+        - name: dataton-api
+          image: localhost:5000/dataton-api:latest
+          ports:
+            - containerPort: 8080
