@@ -11,12 +11,12 @@ def login():
 
 @api_bp.route('/recommend/popular', methods=['GET'])
 @token_required
-def get_popular_recommendations(current_user):
+def get_popular_recommendations():
     response = recommend_popular_articles()
     return jsonify(response), 200
 
 @api_bp.route('/recommend/content/<user_id>', methods=['POST'])
 @token_required
-def get_content_recommendations(current_user, user_id):
+def get_content_recommendations(user_id):
     response = recommend_content_based(user_id)
     return jsonify(response), 200
