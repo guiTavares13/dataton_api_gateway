@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from api.auth import login_route, token_required
-from api.lambda_client import invoke_lambda
+from api.recommendations import recommend_popular_articles, recommend_content_based
 import json
 
 api_bp = Blueprint('api', __name__)
@@ -9,10 +9,14 @@ api_bp = Blueprint('api', __name__)
 def login():
     return login_route()
 
-@api_bp.route('/invoke-lambda', methods=['POST'])
+@api_bp.route('/recommend/popular', methods=['GET'])
 @token_required
-def invoke_lambda_route(current_user):
-    payload = request.get_json()
-    response = invoke_lambda(json.dumps(payload))
-    return jsonify({"response": response}), 200
+def get_popular_recommendations(current_user):
+    response = recommend_popular_articles()
+    return jsonify(response), 200
 
+@api_bp.route('/recommend/content/<user_id>', methods=['POST'])
+@token_required
+def get_content_recommendations(current_user, user_id):
+    response = recommend_content_based(user_id)
+    return jsonify(response), 200

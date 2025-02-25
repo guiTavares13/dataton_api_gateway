@@ -1,19 +1,17 @@
-# Usar uma imagem base com Python
+# Use uma imagem base do Python
 FROM python:3.9-slim
 
-# Configurar diretório de trabalho
+# Defina o diretório de trabalho
 WORKDIR /app
 
-# Copiar o arquivo requirements para o contêiner
-COPY requirements.txt .
-
-# Instalar as dependências
+# Copie o arquivo requirements.txt e instale as dependências
+COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiar o restante do código para o contêiner
+# Copie o restante do código da aplicação
 COPY . .
 
-# Expor a porta do Flask
+# Exponha a porta que a aplicação irá rodar
 EXPOSE 5000
 
 # Comando para rodar a aplicação
