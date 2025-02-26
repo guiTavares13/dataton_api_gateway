@@ -1,5 +1,10 @@
 # Datathon API G1
 
+## Grupo 87 - Integrantes:
+- Guilherme Tavares RM353804
+- Lucas Santos RM354552
+- Yago Caetano RM353994
+
 ## Descrição
 
 Este projeto implementa um sistema de recomendação de notícias do G1, considerando tanto o problema de **cold start** quanto as preferências de usuários
